@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+<title>Para alguém muito especial · Helô</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&family=Italianno&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Aurora / Fundo global -->
+<div class="aurora-layer">
+  <div class="aurora a1"></div>
+  <div class="aurora a2"></div>
+  <div class="aurora a3"></div>
+</div>
+<canvas id="particles-bg"></canvas>
+
+<!-- Botão de música global -->
+<button id="music-toggle" class="music-toggle" aria-label="Música">
+  <span class="eq"></span>
+</button>
+
+<!-- =========================
+     1. INTRO CINEMATOGRÁFICA
+========================= -->
+<section id="intro" class="scene active">
+  <div class="intro-inner">
+    <p class="intro-line line1">para alguém</p>
+    <h1 class="intro-line line2">muito especial</h1>
+    <p class="intro-sub line3">— uma pequena jornada feita com carinho —</p>
+  </div>
+  <div class="intro-glow"></div>
+</section>
+
+<!-- =========================
+     2. HERO
+========================= -->
+<section id="hero" class="scene">
+  <div class="hero-card glass">
+    <p class="kicker">capítulo 00</p>
+    <h2 class="hero-title">Oii, Minha princesa.</h2>
+    <p class="hero-text">
+      Antes da carta, há um caminho.<br/>
+      Quatro minigames, uma só intenção:<br/>
+      <em>dizer o quanto você importa.</em>
+    </p>
+    <div class="hero-actions">
+      <button class="btn primary" data-go="game1">Começar a jornada</button>
+    </div>
+    <p class="hero-tip">use o som ligado — é melhor assim 🤍</p>
+  </div>
+</section>
+
+<!-- =========================
+     3. MINIGAME 1 — LABIRINTO
+========================= -->
+<section id="game1" class="scene">
+  <header class="scene-head">
+    <p class="kicker">capítulo 01</p>
+    <h2>Labirinto das Luzes</h2>
+    <p class="hint">Encontre o coração escondido — <span class="kbd">WASD</span> / setas / toque</p>
+  </header>
+  <div class="maze-wrap glass">
+    <canvas id="maze"></canvas>
+  </div>
+  <div class="touch-pad" id="touchpad" aria-hidden="true">
+    <button data-dir="up">▲</button>
+    <div>
+      <button data-dir="left">◀</button>
+      <button data-dir="down">▼</button>
+      <button data-dir="right">▶</button>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     4. MINIGAME 2 — MEMÓRIA
+========================= -->
+<section id="game2" class="scene">
+  <header class="scene-head">
+    <p class="kicker">capítulo 02</p>
+    <h2>Memórias Brilhantes</h2>
+    <p class="hint">Encontre os 12 pares · <span id="mem-stats">tentativas 0 · 00:00</span></p>
+  </header>
+  <div class="memory-board glass" id="memory-board"></div>
+</section>
+
+<!-- =========================
+     5. MINIGAME 3 — PUZZLE FRASES
+========================= -->
+<section id="game3" class="scene">
+  <header class="scene-head">
+    <p class="kicker">capítulo 03</p>
+    <h2>Frases do Coração</h2>
+    <p class="hint">Arraste as palavras até a linha — monte a frase</p>
+  </header>
+  <div class="puzzle-wrap glass">
+    <p class="phrase-counter" id="phrase-counter">frase 1 de 2</p>
+    <div class="drop-line" id="drop-line"></div>
+    <div class="word-bank" id="word-bank"></div>
+    <div class="puzzle-actions">
+      <button class="btn ghost" id="puzzle-reset">recomeçar frase</button>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     6. MINIGAME 4 — CONSTELAÇÕES
+========================= -->
+<section id="game4" class="scene">
+  <header class="scene-head">
+    <p class="kicker">capítulo 04</p>
+    <h2>Constelação das Emoções</h2>
+    <p class="hint">Conecte as estrelas na ordem dos números</p>
+  </header>
+  <div class="const-wrap glass">
+    <canvas id="constellation"></canvas>
+    <p class="const-progress" id="const-progress">constelação 1 de 3</p>
+  </div>
+</section>
+
+<!-- =========================
+     7. TRANSIÇÃO FINAL
+========================= -->
+<section id="transition" class="scene">
+  <div class="transition-inner">
+    <p class="t-line">você chegou até aqui.</p>
+    <p class="t-line">essa parte é só sua.</p>
+    <p class="t-line">tem uma carta esperando por você.</p>
+    <button class="btn primary big" data-go="letter">Ler a carta</button>
+  </div>
+</section>
+
+<!-- =========================
+     8. CARTA FINAL
+========================= -->
+<section id="letter" class="scene">
+  <article class="letter glass">
+    <h2 class="letter-title">para Helô,</h2>
+    <p id="letter-text" class="letter-body"></p>
+    <div class="letter-actions" id="letter-actions" style="opacity:0">
+      <button class="btn ghost" id="replay">recomeçar a jornada</button>
+    </div>
+  </article>
+</section>
+
+<!-- Overlay de vitória entre fases -->
+<div id="overlay" class="overlay">
+  <div class="overlay-card glass">
+    <h3 id="overlay-title">muito bem 🤍</h3>
+    <p id="overlay-text"></p>
+    <button class="btn primary" id="overlay-next">continuar</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
