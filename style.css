@@ -1089,3 +1089,198 @@ scroll-behavior:auto !important;
 }
 
      }
+
+/* =========================================================
+   PERFORMANCE PATCH MOBILE
+   Cole NO FINAL do seu CSS atual
+========================================================= */
+
+/* ---------- Variáveis otimizadas ---------- */
+:root{
+  --shadow-soft: 0 10px 30px -10px rgba(0,0,0,.45);
+  --shadow-glow: 0 0 18px rgba(52,211,153,.10);
+}
+
+/* ---------- Fundo ---------- */
+body{
+  background:
+    radial-gradient(700px 500px at 80% -10%, #063528 0%, transparent 60%),
+    radial-gradient(600px 450px at -10% 100%, #04241c 0%, transparent 55%),
+    linear-gradient(180deg, var(--bg-0), var(--bg-1) 60%, #021510 100%);
+}
+
+/* ---------- Aurora MUITO mais leve ---------- */
+.aurora-layer{
+  filter: blur(18px);
+  opacity: .35;
+  will-change: transform;
+}
+
+.aurora{
+  animation-duration: 40s !important;
+  opacity: .25;
+}
+
+/* ---------- Glass otimizado ---------- */
+.glass{
+  background: rgba(10,40,32,.82) !important;
+
+  /* REMOVE o blur pesado */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  box-shadow:
+    var(--shadow-soft),
+    inset 0 1px 0 rgba(255,255,255,.03);
+}
+
+/* ---------- Botões ---------- */
+.btn{
+  transition:
+    transform .18s ease,
+    background .18s ease;
+}
+
+.btn.primary{
+  box-shadow:
+    0 8px 20px -8px rgba(52,211,153,.35);
+}
+
+.btn.primary:hover{
+  box-shadow:
+    0 10px 24px -10px rgba(110,247,183,.40);
+}
+
+/* ---------- Música ---------- */
+.music-toggle{
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  background: rgba(10,40,32,.9);
+}
+
+/* ---------- Cards ---------- */
+.card-face{
+  backdrop-filter: none !important;
+
+  box-shadow:
+    inset 0 0 10px rgba(110,247,183,.04);
+}
+
+.card.matched .card-face.front{
+  box-shadow:
+    0 0 12px rgba(110,247,183,.25);
+}
+
+/* ---------- Puzzle ---------- */
+.word{
+  transition:
+    transform .12s ease,
+    opacity .12s ease;
+}
+
+.word:hover{
+  transform: none;
+  box-shadow: none;
+}
+
+/* ---------- Canvas ---------- */
+#particles-bg,
+#maze,
+#constellation{
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* ---------- Overlay ---------- */
+.overlay{
+  backdrop-filter: none !important;
+}
+
+/* ---------- Animações reduzidas ---------- */
+.hero-card{
+  animation: floatY 14s ease-in-out infinite;
+}
+
+@keyframes floatY{
+  0%,100%{
+    transform: translateY(0);
+  }
+
+  50%{
+    transform: translateY(-2px);
+  }
+}
+
+/* ---------- Glow reduzido ---------- */
+.line2{
+  text-shadow: 0 0 12px rgba(110,247,183,.18);
+}
+
+.letter-title{
+  text-shadow: 0 0 12px rgba(110,247,183,.20);
+}
+
+/* ---------- Mobile extremo ---------- */
+@media (max-width:640px){
+
+  .aurora-layer{
+    display:none;
+  }
+
+  #particles-bg{
+    opacity:.35;
+  }
+
+  .scene{
+    transition:
+      opacity .45s ease,
+      transform .45s ease;
+  }
+
+  .scene.leaving{
+    transform: translateY(-2px);
+  }
+
+  .hero-card{
+    animation:none;
+  }
+
+  .glass{
+    border-radius:18px;
+  }
+
+  .btn:hover{
+    transform:none;
+  }
+
+  .card-inner{
+    transition: transform .4s ease;
+  }
+
+  .t-line{
+    transition:
+      opacity .8s ease,
+      transform .8s ease;
+  }
+}
+
+/* ---------- Acessibilidade + performance ---------- */
+@media (prefers-reduced-motion: reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation:none !important;
+    transition:none !important;
+    scroll-behavior:auto !important;
+  }
+
+  #particles-bg{
+    display:none;
+  }
+
+  .aurora-layer{
+    display:none;
+  }
+}
