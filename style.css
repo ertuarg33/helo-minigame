@@ -1174,14 +1174,33 @@ body{
 
 /* ---------- Puzzle ---------- */
 .word{
-  transition:
-    transform .12s ease,
-    opacity .12s ease;
-}
+  padding:.6rem 1.1rem;
+  border-radius:999px;
+  cursor:grab;
+  user-select:none;
 
-.word:hover{
-  transform: none;
-  box-shadow: none;
+  background:
+    linear-gradient(
+      160deg,
+      rgba(15,55,42,.85),
+      rgba(7,30,24,.85)
+    );
+
+  border:1px solid var(--glass-border);
+
+  font-family:var(--serif);
+  font-size:1.05rem;
+  color:var(--ink);
+
+  transition:
+    opacity .15s ease,
+    background .15s ease;
+
+  touch-action:manipulation;
+
+  position:relative;
+
+  z-index:1;
 }
 
 /* ---------- Canvas ---------- */
